@@ -1,5 +1,15 @@
 # [ClipBoard](https://0cb.vercel.app/)
 
+#### 0cb is a free online tool that help you to Copy and Retrieve Text and images between any devices. Just copy the text and share the ID.
+
+If you want to edit the Text in future, give `-e` in the end of your Clipboard ID while creating one. Try it out.
+
+`NOTE: You need to create a Password for this feature. Don't forget it.`
+
+#### 0cb also have URL shortener with `stats` which gives number of user clicked the link, and user details such as browser name, operating system, and PC type in an graphical interface.
+
+<hr/>
+
 ### Migration from React to Astro. Originl Repo [here](https://github.com/SarathAdhi/ClipBoard)
 
 <table align="center"><tr><td valign="top" width="33%">
@@ -23,12 +33,6 @@
 </div>
 
 </td></tr></table>
-
-ClipBoard is a free online tool that help you to Copy and Retrieve Text between any devices. Just copy the text and share the ID.
-
-If you want to edit the Text in future, give `-e` in the end of your Clipboard ID while creating one. Try it out.
-
-`NOTE: You need to create a Password for this feature. Don't forget it.`
 
 <br />
 
