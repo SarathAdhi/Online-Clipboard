@@ -1,5 +1,7 @@
 # [ClipBoard](https://0cb.vercel.app/)
 
+#### Migration from React to Astro. Originl repo [here](https://github.com/SarathAdhi/ClipBoard)
+
 ClipBoard is a free online tool that help you to Copy and Retrieve Text between any devices. Just copy the text and share the ID.
 
 If you want to edit the Text in future, give `-e` in the end of your Clipboard ID while creating one. Try it out.
