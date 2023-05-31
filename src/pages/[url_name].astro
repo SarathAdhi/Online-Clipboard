@@ -1,0 +1,123 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { supabase } from "@lib/supabase";
+import UrlStats from "@modules/Url/UrlStats";
+import DeviceDetector from "device-detector-js";
+import moment from "moment";
+
+const userAgent = Astro.request.headers.get("user-agent");
+const deviceDetector = new DeviceDetector();
+const { client, device, os } = deviceDetector.parse(userAgent!);
+
+let urlDetails: Url;
+
+const { url_name } = Astro.params;
+
+const { data } = await supabase
+  .from("url-minifier")
+  .select("*")
+  .eq("name", url_name?.includes("+") ? url_name.slice(0, -1) : url_name);
+
+const _data = data as Url[];
+
+urlDetails = _data[0];
+
+if (urlDetails && !url_name?.includes("+")) {
+  console.log("REDIRECT");
+
+  await supabase
+    .from("url-minifier")
+    .update({
+      stats: [
+        ...urlDetails.stats,
+        {
+          browser: client?.name,
+          type: device?.type,
+          os: os?.name,
+          visitedAt: new Date(),
+        },
+      ],
+    })
+    .eq("name", url_name);
+
+  return Astro.redirect(urlDetails?.url);
+}
+
+let browserLabel = new Map();
+let typeLabel = new Map();
+let osLabel = new Map();
+let visitsCount = new Map();
+
+urlDetails?.stats.map((e) => {
+  browserLabel.set(e.browser, (browserLabel.get(e.browser) || 0) + 1);
+
+  typeLabel.set(e.type, (typeLabel.get(e.type) || 0) + 1);
+
+  osLabel.set(e.os, (osLabel.get(e.os) || 0) + 1);
+
+  const month = moment(e.visitedAt).format("MMMM");
+  visitsCount.set(month, (visitsCount.get(month) || 0) + 1);
+});
+
+const visitsChartData = {
+  labels: [...visitsCount.keys()],
+  datasets: [
+    {
+      label: "Visits per month",
+      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
+      data: [...visitsCount.values()],
+    },
+  ],
+};
+
+const browserData = {
+  labels: [...browserLabel.keys()],
+  datasets: [
+    {
+      label: "Browsers",
+      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
+      data: [...browserLabel.values()],
+    },
+  ],
+};
+
+const osData = {
+  labels: [...osLabel.keys()],
+  datasets: [
+    {
+      label: "OS",
+      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
+      data: [...osLabel.values()],
+    },
+  ],
+};
+
+const typeData = {
+  labels: [...typeLabel.keys()],
+  datasets: [
+    {
+      label: "Type",
+      backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
+      data: [...typeLabel.values()],
+    },
+  ],
+};
+
+const chartsData = [visitsChartData, browserData, osData, typeData];
+---
+
+<PageLayout title="Stats | 0cb" className="gap-4">
+  {
+    !urlDetails && (
+      <div class="card space-y-4">
+        <h1 class="text-center">URL not exist</h1>
+      </div>
+    )
+  }
+
+  {
+    urlDetails && (
+      <UrlStats barCharts={chartsData} pieCharts={chartsData} client:only />
+    )
+  }
+</PageLayout>

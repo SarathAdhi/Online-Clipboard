@@ -122,6 +122,11 @@ const RetrieveSection = () => {
           <>
             <hr className="w-full border-gray-300 border my-2 rounded-lg" />
 
+            <div
+              className="absolute"
+              ref={(e) => e?.scrollIntoView({ behavior: "smooth" })}
+            />
+
             <div className="w-full grid gap-2">
               {enableTextEditing ? (
                 <Textarea
@@ -168,11 +173,6 @@ const RetrieveSection = () => {
                   ))}
               </div>
             </div>
-
-            <div
-              className="absolute"
-              ref={(e) => e?.scrollIntoView({ behavior: "smooth" })}
-            />
           </>
         )}
       </form>

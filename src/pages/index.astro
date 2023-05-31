@@ -5,10 +5,10 @@ import IntroSectionAstro from "@modules/Home/IntroSectionAstro.astro";
 import RetrieveSection from "@modules/Home/RetrieveSection";
 ---
 
-<PageLayout title="Online ClipBoard" className="gap-4">
+<PageLayout title="Online ClipBoard | 0cb" className="gap-4">
   <IntroSectionAstro />
 
-  <AddSection client:only="react" />
+  <AddSection client:load />
 
-  <RetrieveSection client:only="react" />
+  <RetrieveSection client:only />
 </PageLayout>

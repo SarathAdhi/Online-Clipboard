@@ -1,0 +1,8 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import UrlMinifierForm from "@modules/Url/UrlMinifierForm";
+---
+
+<PageLayout title="Url | 0cb" className="gap-4">
+  <UrlMinifierForm origin={Astro.url.origin} client:load />
+</PageLayout>

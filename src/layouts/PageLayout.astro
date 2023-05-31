@@ -3,6 +3,17 @@ import { twMerge } from "tailwind-merge";
 import "@styles/global.css";
 import ReactToast from "@components/ReactToast";
 
+const pages = [
+  {
+    name: "Clipboard",
+    href: "/",
+  },
+  {
+    name: "Url minifier",
+    href: "/url",
+  },
+];
+
 const { title, className } = Astro.props;
 ---
 
@@ -28,11 +39,26 @@ const { title, className } = Astro.props;
   </head>
 
   <body class="min-h-screen bg-slate-100 flex flex-col items-center">
-    <header class="w-full flex flex-col items-center bg-gray-300">
-      <div class="w-full max-w-[1280px] p-2 sm:p-4">
+    <header class="sticky top-0 w-full flex flex-col items-center bg-inherit">
+      <div
+        class="w-full max-w-[1280px] flex justify-between items-center p-2 sm:px-4"
+      >
         <h1>
-          <a href="/" class="underline cursor-pointer">0ClipBoard</a>
+          <a href="/" class="underline cursor-pointer">0CB</a>
         </h1>
+
+        <div class="flex">
+          {
+            pages.map(({ name, href }) => (
+              <a
+                class="py-2 px-4 hover:bg-slate-200 rounded-md font-medium"
+                href={href}
+              >
+                {name}
+              </a>
+            ))
+          }
+        </div>
       </div>
     </header>
 
