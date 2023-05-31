@@ -1,0 +1,9 @@
+{
+  "name": "Online Clipboard",
+  "short_name": "0cb",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f2f5f9",
+  "description": "ClipBoard is a free online tool that help you to Copy and Retrieve Text between any devices.",
+  "icons": []
+}

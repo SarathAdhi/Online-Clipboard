@@ -1,0 +1,35 @@
+---
+---
+
+<div class="card space-y-4">
+  <h2 class="font-normal">
+    <strong>0ClipBoard</strong> is a free online tool that help you to{" "}
+    <strong>Copy</strong> and
+    <strong> Retrieve Text</strong> between any devices. Just copy the text and share
+    the ID.
+  </h2>
+
+  <h2 class="font-normal">
+    If you want to edit the <strong>Text</strong> in future, give{" "}
+    <kbd>-e</kbd> in the end of your Clipboard ID while creating one.{" "}
+
+    <button
+      id="try-now-btn"
+      class="hover:underline text-blue-800 hover:text-blue-600"
+    >
+      Try it out.
+    </button>
+  </h2>
+
+  <h3>
+    NOTE: You need to create a Password for this feature. Don't forget it.
+  </h3>
+</div>
+
+<script>
+  import { saveClipBoardId } from "@utils/store";
+
+  document.querySelector("#try-now-btn")?.addEventListener("click", () => {
+    saveClipBoardId.set(`${Math.floor(1000 + Math.random() * 9000)}-e`);
+  });
+</script>

@@ -1,0 +1,14 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import AddSection from "@modules/Home/AddSection";
+import IntroSectionAstro from "@modules/Home/IntroSectionAstro.astro";
+import RetrieveSection from "@modules/Home/RetrieveSection";
+---
+
+<PageLayout title="Online ClipBoard" className="gap-4">
+  <IntroSectionAstro />
+
+  <AddSection client:only="react" />
+
+  <RetrieveSection client:only="react" />
+</PageLayout>
