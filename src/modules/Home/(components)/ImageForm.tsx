@@ -5,6 +5,7 @@ import { cn } from "@utils/cn";
 import { useClipboardFunctions } from "hooks/useClipboardFunctions";
 import { Copy, Share2, Loader2 } from "lucide-react";
 import { ToolTip } from "@ui/tooltip";
+import { useEffect } from "react";
 
 interface ButtonWithTooltip
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -35,6 +36,10 @@ const ImageForm = () => {
     handleUploadImage,
     readImageFromClipboard,
   } = useClipboardFunctions();
+
+  useEffect(() => {
+    setUuid(uuid.replace("-e", ""));
+  }, [uuid]);
 
   return (
     <div className="grid gap-4">
