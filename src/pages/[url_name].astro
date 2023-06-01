@@ -4,6 +4,7 @@ import { supabase } from "@lib/supabase";
 import UrlStats from "@modules/Url/UrlStats";
 import DeviceDetector from "device-detector-js";
 import moment from "moment";
+import type { map } from "nanostores";
 
 const userAgent = Astro.request.headers.get("user-agent");
 const deviceDetector = new DeviceDetector();
@@ -74,7 +75,7 @@ const browserData = {
   labels: [...browserLabel.keys()],
   datasets: [
     {
-      label: "Browsers",
+      label: "Browser",
       backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
       data: [...browserLabel.values()],
     },
@@ -85,7 +86,7 @@ const osData = {
   labels: [...osLabel.keys()],
   datasets: [
     {
-      label: "OS",
+      label: "Operating system",
       backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
       data: [...osLabel.values()],
     },
@@ -96,7 +97,7 @@ const typeData = {
   labels: [...typeLabel.keys()],
   datasets: [
     {
-      label: "Type",
+      label: "PC type",
       backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
       data: [...typeLabel.values()],
     },

@@ -48,7 +48,7 @@ const RetrieveSection = () => {
         navigator.clipboard.writeText(_clipBoardText);
         setClipBoardText(_clipBoardText);
 
-        setClipboardType(data[0].type);
+        setClipboardType(data[0].type || "text");
       }
       //
       else throw new Error("Clipboard not found");

@@ -1,5 +1,5 @@
 ---
-import { twMerge } from "tailwind-merge";
+import { cn } from "@utils/cn";
 import "@styles/global.css";
 import ReactToast from "@components/ReactToast";
 
@@ -15,6 +15,7 @@ const pages = [
 ];
 
 const { title, className } = Astro.props;
+const pathname = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -47,11 +48,14 @@ const { title, className } = Astro.props;
           <a href="/" class="underline cursor-pointer">0CB</a>
         </h1>
 
-        <div class="flex">
+        <div class="flex gap-1">
           {
             pages.map(({ name, href }) => (
               <a
-                class="py-2 px-4 hover:bg-slate-200 rounded-md font-medium"
+                class={cn(
+                  "py-2 px-4 hover:bg-slate-200 rounded-md font-medium",
+                  pathname === href && "!bg-slate-200"
+                )}
                 href={href}
               >
                 {name}
@@ -63,7 +67,7 @@ const { title, className } = Astro.props;
     </header>
 
     <main
-      class={twMerge(
+      class={cn(
         "flex-1 w-full max-w-[1280px] p-2 sm:p-4 flex flex-col",
         className
       )}
