@@ -5,5 +5,26 @@
   "display": "standalone",
   "background_color": "#f2f5f9",
   "description": "ClipBoard is a free online tool that help you to Copy and Retrieve Text and Image between any devices.",
-  "icons": []
+  "icons": [
+    {
+      "src": "./icon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-64.jpg",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    }
+  ]
 }
