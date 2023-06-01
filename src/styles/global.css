@@ -106,9 +106,6 @@ input[type="number"] {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-}
-
-@layer base {
   h1 {
     @apply text-2xl md:text-3xl font-semibold;
   }
