@@ -118,7 +118,7 @@ export const useClipboardFunctions = () => {
 
     toast.success("Image uploaded. Save the image");
 
-    handleUploadImage();
+    autoGenerateUniqueUuid();
   }
 
   async function handleUploadImage(e?: React.FormEvent) {
@@ -134,21 +134,23 @@ export const useClipboardFunctions = () => {
 
     if (error) return toast.error(error.message);
 
-    const { data } = supabase.storage
-      .from("clipboard-img")
-      .getPublicUrl(`clipboard-${uuid}`);
+    try {
+      const { data } = supabase.storage
+        .from("clipboard-img")
+        .getPublicUrl(`clipboard-${uuid}`);
 
-    if (data) return toast.error("Something went wrong");
+      await supabase
+        .from("clipboard")
+        .insert({ uuid, text: data.publicUrl, type: "image" });
 
-    await supabase
-      .from("clipboard")
-      .insert({ uuid, text: data, type: "image" });
+      toast.success("Saved");
 
-    toast.success("Saved");
-
-    setImageUrl(data);
-    setClipBoardUuid(uuid);
-    setUuid("");
+      setImageUrl(data.publicUrl);
+      setClipBoardUuid(uuid);
+      setUuid("");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   }
 
   return {

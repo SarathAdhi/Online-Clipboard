@@ -118,15 +118,14 @@ input[type="number"] {
   p {
     @apply text-base md:text-lg;
   }
-
   kbd {
-    @apply bg-green-300 px-1 rounded-sm;
+    @apply dark:bg-green-500 bg-green-300 px-1 rounded-sm;
   }
 }
 
 @layer components {
   .card {
-    @apply p-2 sm:p-4 rounded-md bg-white border-2;
+    @apply p-2 sm:p-4 rounded-md dark:bg-[#111] bg-white border-2 dark:border-gray-500;
   }
   .ui-container {
     @apply grid w-full items-center gap-2;

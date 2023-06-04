@@ -45,7 +45,10 @@ const RetrieveSection = () => {
 
         const _clipBoardText = data[0].text;
 
-        navigator.clipboard.writeText(_clipBoardText);
+        if (data[0].type === "text") {
+          navigator.clipboard.writeText(_clipBoardText);
+        }
+
         setClipBoardText(_clipBoardText);
 
         setClipboardType(data[0].type || "text");
@@ -113,7 +116,7 @@ const RetrieveSection = () => {
         )}
 
         <Button variant="success" type="submit">
-          Retrieve Text
+          Retrieve
         </Button>
 
         {isLoading && <Loader2 width="30" className="animate-spin" />}
@@ -145,7 +148,7 @@ const RetrieveSection = () => {
                   />
                 </ScrollArea>
               ) : (
-                <img loading="lazy" src={clipBoardText} alt="Saved Image" />
+                <img src={clipBoardText} alt="Saved Image" />
               )}
 
               <div className="flex justify-between items-start flex-wrap gap-2">
