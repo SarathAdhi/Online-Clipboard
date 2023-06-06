@@ -1,18 +1,22 @@
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { useUrlMinifierFunctions } from "hooks/useUrlMinifierFunctions";
+import { Loader2 } from "lucide-react";
 import { toast } from "react-hot-toast";
 
 const UrlMinifierForm = ({ origin = "" }) => {
-  const { handleFormSubmit, setUrl, url, shortName } =
+  const { handleFormSubmit, setUrl, url, shortName, isLoading } =
     useUrlMinifierFunctions();
 
   const shortenUrl = `${origin}/${shortName}`;
 
   return (
     <div className="space-y-4">
-      <form className="card grid gap-2" onSubmit={handleFormSubmit}>
-        <h1 className="mb-2">URL shortener with Stats</h1>
+      <form
+        className="card flex flex-col items-start gap-4"
+        onSubmit={handleFormSubmit}
+      >
+        <h1 className="mb-2">URL Shortener with Stats</h1>
 
         <Input
           label="Url"
@@ -23,7 +27,13 @@ const UrlMinifierForm = ({ origin = "" }) => {
           required
         />
 
-        <Button type="submit">Short</Button>
+        <Button type="submit">
+          {isLoading ? (
+            <Loader2 width="30" className="animate-spin" />
+          ) : (
+            "Short"
+          )}
+        </Button>
       </form>
 
       {shortName && (

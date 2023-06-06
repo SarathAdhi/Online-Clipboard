@@ -62,8 +62,8 @@ const TextForm = () => {
             required
           />
 
-          <Button type="button" onClick={autoGenerateUniqueUuid}>
-            {isLoading ? (
+          <Button type="button" onClick={() => autoGenerateUniqueUuid(true)}>
+            {isLoading.generateIdBtn ? (
               <Loader2 width="30" className="animate-spin" />
             ) : (
               "Generate ID"
@@ -94,7 +94,11 @@ const TextForm = () => {
         />
 
         <Button variant="success" type="submit">
-          Save Text
+          {isLoading.saveTextBtn ? (
+            <Loader2 width="30" className="animate-spin" />
+          ) : (
+            "Save Text"
+          )}
         </Button>
       </form>
 

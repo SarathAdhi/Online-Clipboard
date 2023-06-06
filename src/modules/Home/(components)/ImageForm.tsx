@@ -65,8 +65,8 @@ const ImageForm = () => {
             required
           />
 
-          <Button type="button" onClick={autoGenerateUniqueUuid}>
-            {isLoading ? (
+          <Button type="button" onClick={() => autoGenerateUniqueUuid(true)}>
+            {isLoading.generateIdBtn ? (
               <Loader2 width="30" className="animate-spin" />
             ) : (
               "Generate ID"
@@ -103,7 +103,11 @@ const ImageForm = () => {
         </div>
 
         <Button variant="success" type="submit">
-          Save Image
+          {isLoading.saveImgBtn ? (
+            <Loader2 width="30" className="animate-spin" />
+          ) : (
+            "Save Image"
+          )}
         </Button>
       </form>
 

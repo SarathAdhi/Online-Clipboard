@@ -3,7 +3,7 @@
 
 <div class="card space-y-4">
   <h1 class="font-normal text-2xl">
-    <strong>0ClipBoard</strong> is a free online tool that help you to{" "}
+    <strong>0CB</strong> is a free online tool that help you to{" "}
     <strong>Copy</strong> and
     <strong> Retrieve Text</strong> between any devices. Just copy the text and share
     the ID.
@@ -30,6 +30,6 @@
   import { saveClipBoardId } from "@utils/store";
 
   document.querySelector("#try-now-btn")?.addEventListener("click", () => {
-    saveClipBoardId.set(`${Math.floor(1000 + Math.random() * 9000)}-e`);
+    saveClipBoardId.set(`${Math.random()}`);
   });
 </script>

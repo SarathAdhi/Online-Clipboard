@@ -14,12 +14,17 @@ export const useClipboardFunctions = () => {
 
   const [clipBoardUuid, setClipBoardUuid] = useState("");
   const [isUuidAvailable, setIsUuidAvailable] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    generateIdBtn: false,
+    saveTextBtn: false,
+    saveImgBtn: false,
+  });
 
   const $saveClipBoardId = useStore(saveClipBoardId);
 
   useEffect(() => {
-    setUuid($saveClipBoardId);
+    // setUuid($saveClipBoardId);
+    if ($saveClipBoardId) autoGenerateUniqueUuid(true, true);
   }, [$saveClipBoardId]);
 
   useEffect(() => {
@@ -29,7 +34,10 @@ export const useClipboardFunctions = () => {
   const isTextEditable = uuid?.split("-")[1]?.toLowerCase() === "e";
 
   async function checkForUuidAvailability() {
-    setIsLoading(true);
+    setIsLoading({
+      ...isLoading,
+      generateIdBtn: true,
+    });
 
     if (!uuid) {
       setIsUuidAvailable(false);
@@ -45,11 +53,19 @@ export const useClipboardFunctions = () => {
       else setIsUuidAvailable(true);
     }
 
-    setIsLoading(false);
+    setIsLoading({
+      ...isLoading,
+      generateIdBtn: false,
+    });
   }
 
   async function handleSaveClipBoard(e: React.FormEvent) {
     e.preventDefault();
+
+    setIsLoading({
+      ...isLoading,
+      saveTextBtn: true,
+    });
 
     if (!text) {
       toast.error("Enter some TEXT");
@@ -75,15 +91,32 @@ export const useClipboardFunctions = () => {
     } catch (error) {
       toast.error("Something went wrong");
     }
+
+    setIsLoading({
+      ...isLoading,
+      saveTextBtn: false,
+    });
   }
 
-  async function autoGenerateUniqueUuid() {
+  async function autoGenerateUniqueUuid(
+    setLoadingState = false,
+    passwordProtection = false
+  ) {
+    if (setLoadingState)
+      setIsLoading({
+        ...isLoading,
+        generateIdBtn: true,
+      });
+
     let _uuid = funcUuid();
+    _uuid = passwordProtection ? `${_uuid}-e` : _uuid;
     let i = 0;
+
+    const isTextEditable = _uuid?.split("-")[1]?.toLocaleLowerCase() === "e";
 
     while (true) {
       const { data } = await supabase
-        .from("clipboard")
+        .from(isTextEditable ? "clipboard-edit" : "clipboard")
         .select("*")
         .eq("uuid", _uuid);
 
@@ -124,6 +157,11 @@ export const useClipboardFunctions = () => {
   async function handleUploadImage(e?: React.FormEvent) {
     e?.preventDefault();
 
+    setIsLoading({
+      ...isLoading,
+      saveImgBtn: true,
+    });
+
     if (!uuid) return toast.error("Enter the clipboard ID");
 
     if (!imageFile) return toast.error("Image not found");
@@ -151,6 +189,11 @@ export const useClipboardFunctions = () => {
     } catch (error) {
       toast.error("Something went wrong");
     }
+
+    setIsLoading({
+      ...isLoading,
+      saveImgBtn: false,
+    });
   }
 
   return {

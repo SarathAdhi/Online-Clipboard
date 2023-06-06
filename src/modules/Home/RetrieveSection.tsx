@@ -8,20 +8,27 @@ import { ScrollArea } from "@components/ui/scroll-area";
 import { linkify } from "@utils/linkify";
 import { Loader2 } from "lucide-react";
 
-const RetrieveSection = () => {
-  const urlParams = new URL(window.location.href).searchParams;
-  const cbId = urlParams.get("id");
-
-  const [clipBoardUuid, setClipBoardUuid] = useState(cbId || "");
-  const [clipBoardText, setClipBoardText] = useState("");
+const RetrieveSection = ({
+  _clipBoardUuid = "",
+  _clipBoardText = "",
+  _clipBoardType = "text",
+}) => {
+  const [clipBoardUuid, setClipBoardUuid] = useState(_clipBoardUuid);
+  const [clipBoardText, setClipBoardText] = useState(_clipBoardText);
+  const [clipboardType, setClipboardType] = useState(_clipBoardType);
   const [isLoading, setIsLoading] = useState(false);
   const [enableTextEditing, setEnableTextEditing] = useState(false);
   const [password, setPassword] = useState("");
-  const [clipboardType, setClipboardType] = useState("text");
 
   useEffect(() => {
-    if (cbId) findClipBoard();
-  }, [cbId]);
+    if (clipboardType === "text") {
+      navigator.clipboard.writeText(_clipBoardText);
+
+      toast.success("Copied to Clipboard", {
+        position: "bottom-center",
+      });
+    }
+  }, [clipBoardText]);
 
   const isTextEditable =
     clipBoardUuid?.split("-")[1]?.toLocaleLowerCase() === "e";
@@ -45,13 +52,9 @@ const RetrieveSection = () => {
 
         const _clipBoardText = data[0].text;
 
-        if (data[0].type === "text") {
-          navigator.clipboard.writeText(_clipBoardText);
-        }
+        setClipboardType(data[0].type || "text");
 
         setClipBoardText(_clipBoardText);
-
-        setClipboardType(data[0].type || "text");
       }
       //
       else throw new Error("Clipboard not found");
@@ -116,19 +119,22 @@ const RetrieveSection = () => {
         )}
 
         <Button variant="success" type="submit">
-          Retrieve
+          {isLoading ? (
+            <Loader2 width="30" className="animate-spin" />
+          ) : (
+            "Retrieve"
+          )}
         </Button>
 
-        {isLoading && <Loader2 width="30" className="animate-spin" />}
-
+        {clipBoardUuid && (
+          <div
+            className="absolute"
+            ref={(e) => e?.scrollIntoView({ behavior: "smooth" })}
+          />
+        )}
         {!!clipBoardText && (
           <>
             <hr className="w-full border-gray-300 border my-2 rounded-lg" />
-
-            <div
-              className="absolute"
-              ref={(e) => e?.scrollIntoView({ behavior: "smooth" })}
-            />
 
             <div className="w-full grid gap-2">
               {enableTextEditing ? (
@@ -138,43 +144,46 @@ const RetrieveSection = () => {
                   onChange={(e) => setClipBoardText(e.target.value)}
                   disabled={!enableTextEditing}
                 />
-              ) : clipboardType === "text" ? (
-                <ScrollArea className="card !p-0 border max-h-[500px]">
-                  <div
-                    className="whitespace-pre-line p-2 sm:p-4"
-                    dangerouslySetInnerHTML={{
-                      __html: linkify(clipBoardText),
-                    }}
-                  />
-                </ScrollArea>
-              ) : (
+              ) : clipboardType === "image" ? (
                 <img src={clipBoardText} alt="Saved Image" />
+              ) : (
+                <>
+                  <ScrollArea className="card !p-0 border max-h-[500px]">
+                    <div
+                      className="whitespace-pre-line p-2 sm:p-4"
+                      dangerouslySetInnerHTML={{
+                        __html: linkify(clipBoardText),
+                      }}
+                    />
+                  </ScrollArea>
+
+                  <div className="flex justify-between items-start flex-wrap gap-2">
+                    <p>
+                      Text automatically copied to your{" "}
+                      <strong>Clipboard</strong>.
+                    </p>
+
+                    {isTextFoundAndEditable &&
+                      (enableTextEditing ? (
+                        <Button
+                          variant="success"
+                          type="button"
+                          onClick={handleClipBoardUpdate}
+                        >
+                          Update
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="outline"
+                          type="button"
+                          onClick={() => setEnableTextEditing(true)}
+                        >
+                          Edit
+                        </Button>
+                      ))}
+                  </div>
+                </>
               )}
-
-              <div className="flex justify-between items-start flex-wrap gap-2">
-                <p>
-                  Text automatically copied to your <strong>Clipboard</strong>.
-                </p>
-
-                {isTextFoundAndEditable &&
-                  (enableTextEditing ? (
-                    <Button
-                      variant="success"
-                      type="button"
-                      onClick={handleClipBoardUpdate}
-                    >
-                      Update
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="outline"
-                      type="button"
-                      onClick={() => setEnableTextEditing(true)}
-                    >
-                      Edit
-                    </Button>
-                  ))}
-              </div>
             </div>
           </>
         )}

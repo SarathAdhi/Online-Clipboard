@@ -1,8 +1,28 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
+import { supabase } from "@lib/supabase";
 import AddSection from "@modules/Home/AddSection";
 import IntroSectionAstro from "@modules/Home/IntroSectionAstro.astro";
 import RetrieveSection from "@modules/Home/RetrieveSection";
+
+const {
+  url: { searchParams },
+} = Astro;
+
+let cbId = searchParams.get("id") || "";
+let _clipBoardText = "";
+let _clipBoardType = "";
+
+const isTextEditable = cbId?.split("-")[1]?.toLocaleLowerCase() === "e";
+
+const { data } = await supabase
+  .from(isTextEditable ? "clipboard-edit" : "clipboard")
+  .select("*")
+  .eq("uuid", cbId);
+
+if (!isTextEditable) _clipBoardText = data![0]?.text;
+
+_clipBoardType = data![0]?.type;
 ---
 
 <PageLayout title="Online ClipBoard | 0cb" className="gap-4">
@@ -10,5 +30,10 @@ import RetrieveSection from "@modules/Home/RetrieveSection";
 
   <AddSection client:load />
 
-  <RetrieveSection client:only />
+  <RetrieveSection
+    client:load
+    _clipBoardUuid={cbId}
+    _clipBoardText={_clipBoardText}
+    _clipBoardType={_clipBoardType}
+  />
 </PageLayout>
