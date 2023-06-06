@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Hubot Sans";
-  src: url("/fonts/Hubot-Sans.woff2") format("woff2 supports variations"),
-    url("/fonts/Hubot-Sans.woff2") format("woff2-variations");
-  font-weight: 200 900;
-  font-stretch: 75% 125%;
-}
-
-html {
-  font-family: "Hubot Sans" !important;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

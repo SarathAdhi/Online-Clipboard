@@ -42,6 +42,20 @@ const pathname = Astro.url.pathname;
       content="yEMc_cA98BPS3jVS06ctOQF5NZiKOfCjnt5Wa8-OgeY"
     />
     <meta name="generator" content={Astro.generator} />
+
+    <style>
+      @font-face {
+        font-family: "Hubot Sans";
+        src: url("/fonts/Hubot-Sans.woff2") format("woff2 supports variations"),
+          url("/fonts/Hubot-Sans.woff2") format("woff2-variations");
+        font-weight: 200 900;
+        font-stretch: 75% 125%;
+      }
+
+      html {
+        font-family: "Hubot Sans" !important;
+      }
+    </style>
   </head>
 
   <body
