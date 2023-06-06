@@ -13,16 +13,18 @@ let cbId = searchParams.get("id") || "";
 let _clipBoardText = "";
 let _clipBoardType = "";
 
-const isTextEditable = cbId?.split("-")[1]?.toLocaleLowerCase() === "e";
+if (cbId) {
+  const isTextEditable = cbId?.split("-")[1]?.toLocaleLowerCase() === "e";
 
-const { data } = await supabase
-  .from(isTextEditable ? "clipboard-edit" : "clipboard")
-  .select("*")
-  .eq("uuid", cbId);
+  const { data } = await supabase
+    .from(isTextEditable ? "clipboard-edit" : "clipboard")
+    .select("*")
+    .eq("uuid", cbId);
 
-if (!isTextEditable) _clipBoardText = data![0]?.text;
+  if (!isTextEditable) _clipBoardText = data![0]?.text;
 
-_clipBoardType = data![0]?.type;
+  _clipBoardType = data![0]?.type;
+}
 ---
 
 <PageLayout title="Online ClipBoard | 0cb" className="gap-4">

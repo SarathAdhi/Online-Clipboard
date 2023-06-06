@@ -4,7 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f2f5f9",
-  "description": "ClipBoard is a free online tool that help you to Copy and Retrieve Text and Image between any devices.",
+  "description": "0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID.",
   "icons": [
     {
       "src": "./icon-32.png",

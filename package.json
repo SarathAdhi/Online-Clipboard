@@ -1,7 +1,33 @@
 {
   "name": "0cb",
+  "description": "0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID.",
   "type": "module",
   "version": "0.0.1",
+  "author": "Sarath Adhithya",
+  "homepage": "https://0cb.vercel.app/",
+  "keywords": [
+    "online clipboard",
+    "online",
+    "free clipboard",
+    "clipboard online",
+    "free online clipboard",
+    "text clipboard online",
+    "temporary copy paste online",
+    "online image clipboard",
+    "online image upload",
+    "free image clipboard",
+    "clipboard image online",
+    "free online clipboard",
+    "image clipboard online",
+    "temporary copy paste image online",
+    "url minifier",
+    "url shorten"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SarathAdhi/Online-Clipboard.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
