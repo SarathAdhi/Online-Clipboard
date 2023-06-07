@@ -9,6 +9,13 @@ const {
   url: { searchParams },
 } = Astro;
 
+// --- Redirect to Realtime clipboard
+let realtimeCbId = searchParams.get("rtid");
+
+if (realtimeCbId) {
+  return Astro.redirect(`/realtime-clipboard?id=${realtimeCbId}`);
+}
+
 let cbId = searchParams.get("id") || "";
 let _clipBoardText = "";
 let _clipBoardType = "";

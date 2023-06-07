@@ -1,0 +1,19 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import RealtimeCb from "@modules/RealtimeCb";
+import { uuid as funcUuid } from "@utils/uuid";
+
+const { url } = Astro;
+
+const id = url.searchParams.get("id");
+
+const uuid = id || funcUuid();
+
+if (!id) {
+  return Astro.redirect(`/realtime-clipboard?id=${uuid}`);
+}
+---
+
+<PageLayout>
+  <RealtimeCb client:load uuid={uuid} />
+</PageLayout>

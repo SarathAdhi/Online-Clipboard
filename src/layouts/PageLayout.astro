@@ -4,23 +4,17 @@ import "@styles/global.css";
 import ReactToast from "@components/ReactToast";
 import ThemeButtonIcon from "@components/ThemeButtonIcon";
 import { keywords } from "../../package.json";
-
-const pages = [
-  {
-    name: "Clipboard",
-    href: "/",
-  },
-  {
-    name: "Url minifier",
-    href: "/url",
-  },
-];
+import NavLinks from "@components/NavLinks";
+import { theme } from "@utils/store";
 
 const { title, className } = Astro.props;
+const myTheme = Astro.cookies.get("theme").value || "dark";
+theme.set(myTheme);
+
 const pathname = Astro.url.pathname;
 ---
 
-<html lang="en" id="html-element" class="dark">
+<html lang="en" id="html-element" class={theme.value}>
   <head>
     <title>{title}</title>
 
@@ -43,7 +37,7 @@ const pathname = Astro.url.pathname;
     />
     <meta name="generator" content={Astro.generator} />
 
-    <style>
+    <style is:global>
       @font-face {
         font-family: "Hubot Sans";
         src: url("/fonts/Hubot-Sans.woff2") format("woff2 supports variations"),
@@ -70,41 +64,29 @@ const pathname = Astro.url.pathname;
         </h2>
 
         <div class="flex gap-1">
-          {
-            pages.map(({ name, href }) => (
-              <a
-                class={cn(
-                  "py-2 px-4 hover:bg-slate-200 hover:dark:bg-[#111] rounded-md font-medium",
-                  pathname === href && "dark:!bg-[#111] !bg-slate-200"
-                )}
-                href={href}
-              >
-                {name}
-              </a>
-            ))
-          }
+          <NavLinks client:load pathname={pathname} />
 
           <button
             id="theme-toggle-btn"
             class="py-2 px-4 hover:bg-slate-200 hover:dark:bg-[#111] rounded-md font-medium"
           >
-            <ThemeButtonIcon client:load />
+            <ThemeButtonIcon client:only theme={theme.value} />
           </button>
         </div>
       </div>
     </header>
+
+    <main
+      class={cn(
+        "flex-1 w-full max-w-[1280px] p-2 sm:p-4 flex flex-col",
+        className
+      )}
+    >
+      <slot />
+    </main>
+
+    <ReactToast client:load />
   </body>
-
-  <main
-    class={cn(
-      "flex-1 w-full max-w-[1280px] p-2 sm:p-4 flex flex-col",
-      className
-    )}
-  >
-    <slot />
-  </main>
-
-  <ReactToast client:load />
 </html>
 
 <script>
@@ -113,10 +95,13 @@ const pathname = Astro.url.pathname;
   const toggleThemeBtn = document.querySelector("#theme-toggle-btn")!;
 
   toggleThemeBtn?.addEventListener("click", () => {
-    const html = document.querySelector("#html-element")!;
-    const _theme = html.className === "dark" ? "light" : "dark";
+    let html = document.querySelector("#html-element")!;
 
+    const _theme = html.className === "dark" ? "light" : "dark";
     html.className = _theme;
+
+    document.cookie = `theme=${_theme}`;
+
     theme.set(_theme);
   });
 </script>

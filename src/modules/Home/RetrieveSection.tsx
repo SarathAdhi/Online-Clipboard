@@ -21,14 +21,14 @@ const RetrieveSection = ({
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (clipboardType === "text") {
+    if (_clipBoardText && _clipBoardType === "text") {
       navigator.clipboard.writeText(_clipBoardText);
 
       toast.success("Copied to Clipboard", {
         position: "bottom-center",
       });
     }
-  }, [clipBoardText]);
+  }, [_clipBoardText]);
 
   const isTextEditable =
     clipBoardUuid?.split("-")[1]?.toLocaleLowerCase() === "e";
@@ -53,6 +53,14 @@ const RetrieveSection = ({
         const _clipBoardText = data[0].text;
 
         setClipboardType(data[0].type || "text");
+
+        if (data[0].type === "text") {
+          navigator.clipboard.writeText(_clipBoardText);
+
+          toast.success("Copied to Clipboard", {
+            position: "bottom-center",
+          });
+        }
 
         setClipBoardText(_clipBoardText);
       }

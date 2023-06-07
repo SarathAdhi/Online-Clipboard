@@ -4,7 +4,6 @@ import { supabase } from "@lib/supabase";
 import UrlStats from "@modules/Url/UrlStats";
 import DeviceDetector from "device-detector-js";
 import moment from "moment";
-import type { map } from "nanostores";
 
 const userAgent = Astro.request.headers.get("user-agent");
 const deviceDetector = new DeviceDetector();
