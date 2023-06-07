@@ -6,6 +6,7 @@ import ThemeButtonIcon from "@components/ThemeButtonIcon";
 import { keywords } from "../../package.json";
 import NavLinks from "@components/NavLinks";
 import { theme } from "@utils/store";
+import { Analytics } from "@vercel/analytics/react";
 
 const { title, className } = Astro.props;
 const myTheme = Astro.cookies.get("theme").value || "dark";
@@ -86,6 +87,7 @@ const pathname = Astro.url.pathname;
     </main>
 
     <ReactToast client:load />
+    <Analytics client:only />
   </body>
 </html>
 
