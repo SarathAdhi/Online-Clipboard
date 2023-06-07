@@ -74,8 +74,6 @@ const RealtimeCb = ({ uuid = "" }) => {
     };
   }, []);
 
-  console.log({ images });
-
   const fileToDataUri = (file: Blob) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -162,7 +160,7 @@ const RealtimeCb = ({ uuid = "" }) => {
           <ScrollArea className="md:h-[500px]">
             <div className="grid grid-cols-1 md:grid-cols- gap-1">
               {images.map((image, index) => (
-                <a href={image} target="_blank">
+                <a href={image}>
                   <img key={index} className="w-full h-full" src={image} />
                 </a>
               ))}
