@@ -6,12 +6,16 @@ import { Label } from "./label";
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
+  containerClassName?: string;
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ name, id = name, label, className, ...props }, ref) => {
+  (
+    { name, id = name, label, containerClassName = "", className, ...props },
+    ref
+  ) => {
     return (
-      <div className="ui-container">
+      <div className={cn("ui-container", containerClassName)}>
         {label && (
           <Label htmlFor={name}>
             {label} {props.required && <span className="text-red-500">*</span>}

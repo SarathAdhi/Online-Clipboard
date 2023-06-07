@@ -118,3 +118,7 @@ input[type="number"] {
     @apply text-blue-700 underline;
   }
 }
+
+input[type="file"]::file-selector-button {
+  @apply text-black dark:text-white;
+}
