@@ -58,7 +58,7 @@ const RetrieveSection = ({
 
         setClipboardType(_clipboardType);
 
-        if (_clipboardType) {
+        if (_clipboardType === "text") {
           navigator.clipboard.writeText(_clipBoardText);
 
           toast.success("Copied to Clipboard", {
@@ -126,7 +126,7 @@ const RetrieveSection = ({
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            ref={(e) => clipBoardUuid && e?.focus()}
+            ref={(e) => _clipBoardUuid && !enableTextEditing && e?.focus()}
             required
           />
         )}
