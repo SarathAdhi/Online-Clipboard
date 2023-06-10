@@ -13,11 +13,15 @@ const pages = [
     href: "/",
   },
   {
-    name: "Realtime Clipboard",
-    href: "/realtime-clipboard",
+    name: "Live Clipboard",
+    href: "/live-clipboard",
   },
   {
-    name: "Url minifier",
+    name: "Scribble",
+    href: "/scribble",
+  },
+  {
+    name: "Url Minifier",
     href: "/url",
   },
 ];
@@ -32,9 +36,9 @@ const NavLinks = ({ pathname = "" }) => {
             <MenubarItem key={name} asChild>
               <a
                 className={cn(
-                  "py-2 px-4 hover:bg-slate-200 hover:dark:bg-[#111] rounded-md font-medium",
+                  "py-2 px-4 hover:bg-slate-200 hover:dark:bg-gray-900 rounded-md font-medium",
                   pathname === href &&
-                    "dark:!bg-[#111] border border-gray-400 !bg-slate-200"
+                    "dark:text-white dark:!bg-gray-900  !bg-slate-200"
                 )}
                 href={href}
               >

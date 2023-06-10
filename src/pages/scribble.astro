@@ -1,0 +1,22 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import ScribbleBoard from "@modules/scribble";
+import IntroSectionScribble from "@modules/scribble/IntroSectionScribble.astro";
+import { uuid as funcUuid } from "@utils/uuid";
+
+const { url } = Astro;
+
+const id = url.searchParams.get("id");
+
+const uuid = id || funcUuid();
+
+if (!id) {
+  return Astro.redirect(`/scribble?id=${uuid}`);
+}
+---
+
+<PageLayout title="Live Scribble | 0cb">
+  <ScribbleBoard client:load uuid={uuid} />
+
+  <IntroSectionScribble />
+</PageLayout>

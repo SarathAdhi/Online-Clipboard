@@ -11,7 +11,7 @@ const UrlStats: React.FC<Props> = ({ barCharts = [], pieCharts = [] }) => {
   return (
     <div className="flex flex-col lg:items-center lg:justify-center gap-8">
       <Tabs defaultValue="pie" className="w-full space-y-4">
-        <TabsList className="bg-slate-200/40">
+        <TabsList className="bg-slate-200/40 dark:text-white ">
           <TabsTrigger value="pie">Pie Chart</TabsTrigger>
           <TabsTrigger value="bar">Bar Chart</TabsTrigger>
         </TabsList>

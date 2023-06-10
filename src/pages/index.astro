@@ -2,7 +2,7 @@
 import PageLayout from "@layouts/PageLayout.astro";
 import { supabase } from "@lib/supabase";
 import AddSection from "@modules/Home/AddSection";
-import IntroSectionAstro from "@modules/Home/IntroSectionAstro.astro";
+import IntroSectionHome from "@modules/Home/IntroSectionHome.astro";
 import RetrieveSection from "@modules/Home/RetrieveSection";
 
 const {
@@ -10,10 +10,10 @@ const {
 } = Astro;
 
 // --- Redirect to Realtime clipboard
-let realtimeCbId = searchParams.get("rtid");
+let realtimeCbId = searchParams.get("lc_id");
 
 if (realtimeCbId) {
-  return Astro.redirect(`/realtime-clipboard?id=${realtimeCbId}`);
+  return Astro.redirect(`/live-clipboard?id=${realtimeCbId}`);
 }
 
 let cbId = searchParams.get("id") || "";
@@ -34,8 +34,11 @@ if (cbId) {
 }
 ---
 
-<PageLayout title="Online ClipBoard | 0cb" className="gap-4">
-  <IntroSectionAstro />
+<PageLayout
+  title="Online ClipBoard | 0cb"
+  description="0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID."
+>
+  <IntroSectionHome />
 
   <AddSection client:load />
 

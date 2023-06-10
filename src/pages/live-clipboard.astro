@@ -1,5 +1,6 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
+import IntroSectionRT from "@modules/RealtimeCb/IntroSectionRT.astro";
 import RealtimeCb from "@modules/RealtimeCb";
 import { uuid as funcUuid } from "@utils/uuid";
 
@@ -10,10 +11,15 @@ const id = url.searchParams.get("id");
 const uuid = id || funcUuid();
 
 if (!id) {
-  return Astro.redirect(`/realtime-clipboard?id=${uuid}`);
+  return Astro.redirect(`/live-clipboard?id=${uuid}`);
 }
 ---
 
-<PageLayout title="Realtime ClipBoard | 0cb">
+<PageLayout
+  title="Live ClipBoard | 0cb"
+  description="Realtime Clipboard to share text between computers very easy."
+>
   <RealtimeCb client:load uuid={uuid} />
+
+  <IntroSectionRT />
 </PageLayout>

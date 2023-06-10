@@ -3,10 +3,10 @@ import { ToolTip } from "@components/ui/tooltip";
 import { supabase } from "@lib/supabase";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { uuidCharactor } from "@utils/uuid";
-import { Share } from "lucide-react";
+import { Copy, Share } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Avatar, AvatarImage } from "@ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
 import { getDummyProfileImage } from "@utils/profile-image";
 import { ScrollArea } from "@components/ui/scroll-area";
 import { Input } from "@components/ui/input";
@@ -90,24 +90,43 @@ const RealtimeCb = ({ uuid = "" }) => {
           {activeUsers.map(({ user }: { user: string }) => (
             <Avatar key={user}>
               <AvatarImage src={getDummyProfileImage(user)} />
+
+              <AvatarFallback>
+                <div className="aspect-square h-full w-full animate-pulse bg-gray-300" />
+              </AvatarFallback>
             </Avatar>
           ))}
         </div>
 
-        <ToolTip tooltip="Share">
-          <button
-            className="p-2 dark:bg-gray-500 bg-white rounded-full border shadow"
-            onClick={() => {
-              navigator.clipboard.writeText(
-                `${window.location.origin}?rtid=${uuid}`
-              );
+        <div className="space-x-2">
+          <ToolTip tooltip="Copy Text">
+            <button
+              className="p-2 dark:bg-popover bg-white rounded-full border shadow"
+              onClick={() => {
+                navigator.clipboard.writeText(text);
 
-              toast.success("Copied to clipboard");
-            }}
-          >
-            <Share size={20} />
-          </button>
-        </ToolTip>
+                toast.success("Copied text to clipboard");
+              }}
+            >
+              <Copy size={20} />
+            </button>
+          </ToolTip>
+
+          <ToolTip tooltip="Share">
+            <button
+              className="p-2 dark:bg-popover bg-white rounded-full border shadow"
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `${window.location.origin}?lc_id=${uuid}`
+                );
+
+                toast.success("Copied to clipboard");
+              }}
+            >
+              <Share size={20} />
+            </button>
+          </ToolTip>
+        </div>
       </div>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-4 flex-1 gap-y-4 md:gap-4">

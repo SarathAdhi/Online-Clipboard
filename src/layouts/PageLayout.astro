@@ -8,7 +8,7 @@ import NavLinks from "@components/NavLinks";
 import { theme } from "@utils/store";
 import { Analytics } from "@vercel/analytics/react";
 
-const { title, className } = Astro.props;
+const { title, className, description = "" } = Astro.props;
 const myTheme = Astro.cookies.get("theme").value || "dark";
 theme.set(myTheme);
 
@@ -28,9 +28,13 @@ const pathname = Astro.url.pathname;
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID."
+      content={description ||
+        "0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID."}
     />
-    <meta name="keywords" content={keywords.join(", ")} />
+    <meta
+      name="keywords"
+      content={keywords.join(", ") + ", " + description?.split(" ")?.join(", ")}
+    />
 
     <meta
       name="google-site-verification"
@@ -81,7 +85,7 @@ const pathname = Astro.url.pathname;
 
     <main
       class={cn(
-        "flex-1 h-full w-full max-w-[1280px] p-2 sm:p-4 flex flex-col",
+        "flex-1 h-full w-full max-w-[1280px] p-2 sm:p-4 flex flex-col gap-2 sm:gap-4",
         className
       )}
     >
