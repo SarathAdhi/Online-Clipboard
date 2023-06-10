@@ -52,9 +52,13 @@ const RetrieveSection = ({
 
         const _clipBoardText = data[0].text;
 
-        setClipboardType(data[0].type || "text");
+        console.log({ data });
 
-        if (data[0].type === "text") {
+        const _clipboardType = data[0].type || "text";
+
+        setClipboardType(_clipboardType);
+
+        if (_clipboardType) {
           navigator.clipboard.writeText(_clipBoardText);
 
           toast.success("Copied to Clipboard", {
@@ -122,6 +126,7 @@ const RetrieveSection = ({
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            ref={(e) => clipBoardUuid && e?.focus()}
             required
           />
         )}
@@ -146,12 +151,26 @@ const RetrieveSection = ({
 
             <div className="w-full grid gap-2">
               {enableTextEditing ? (
-                <Textarea
-                  value={clipBoardText}
-                  rows={6}
-                  onChange={(e) => setClipBoardText(e.target.value)}
-                  disabled={!enableTextEditing}
-                />
+                <>
+                  <Textarea
+                    value={clipBoardText}
+                    rows={6}
+                    onChange={(e) => setClipBoardText(e.target.value)}
+                    disabled={!enableTextEditing}
+                  />
+
+                  <div className="flex justify-end items-end flex-wrap gap-2">
+                    {isTextFoundAndEditable && (
+                      <Button
+                        variant="success"
+                        type="button"
+                        onClick={handleClipBoardUpdate}
+                      >
+                        Update
+                      </Button>
+                    )}
+                  </div>
+                </>
               ) : clipboardType === "image" ? (
                 <img src={clipBoardText} alt="Saved Image" />
               ) : (
@@ -171,24 +190,13 @@ const RetrieveSection = ({
                       <strong>Clipboard</strong>.
                     </p>
 
-                    {isTextFoundAndEditable &&
-                      (enableTextEditing ? (
-                        <Button
-                          variant="success"
-                          type="button"
-                          onClick={handleClipBoardUpdate}
-                        >
-                          Update
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="outline"
-                          type="button"
-                          onClick={() => setEnableTextEditing(true)}
-                        >
-                          Edit
-                        </Button>
-                      ))}
+                    <Button
+                      variant="outline"
+                      type="button"
+                      onClick={() => setEnableTextEditing(true)}
+                    >
+                      Edit
+                    </Button>
                   </div>
                 </>
               )}

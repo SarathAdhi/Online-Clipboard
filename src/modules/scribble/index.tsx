@@ -12,7 +12,18 @@ import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 type ActiveUserProps = {
   presence_ref: string;
   user: string;
+  color: string;
 };
+
+function getDarkColor() {
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += Math.floor(Math.random() * 10);
+  }
+  return color;
+}
+
+const myColor = getDarkColor();
 
 let channel: RealtimeChannel;
 
@@ -37,6 +48,7 @@ const ScribbleBoard = ({ uuid = "" }) => {
       if (status === "SUBSCRIBED") {
         await channel.track({
           user: myId,
+          color: myColor,
         });
       }
     });
@@ -70,16 +82,24 @@ const ScribbleBoard = ({ uuid = "" }) => {
   return (
     <div className="flex flex-col gap-4 flex-1">
       <div className="w-full flex items-center justify-between gap-4">
-        <div className="flex items-center flex-wrap gap-1">
-          {activeUsers.map(({ user }: { user: string }) => (
-            <Avatar key={user}>
-              <AvatarImage src={getDummyProfileImage(user)} />
+        <div className="bg-white rounded-full p-1 flex items-center flex-wrap gap-1">
+          {activeUsers.map(({ user, color }) => {
+            return (
+              <Avatar
+                key={user}
+                className="!border-4"
+                style={{
+                  borderColor: color,
+                }}
+              >
+                <AvatarImage src={getDummyProfileImage(user)} />
 
-              <AvatarFallback>
-                <div className="aspect-square h-full w-full animate-pulse bg-gray-300" />
-              </AvatarFallback>
-            </Avatar>
-          ))}
+                <AvatarFallback>
+                  <div className="aspect-square h-full w-full animate-pulse bg-gray-300" />
+                </AvatarFallback>
+              </Avatar>
+            );
+          })}
         </div>
 
         <div className="space-x-2">
@@ -133,7 +153,7 @@ const ScribbleBoard = ({ uuid = "" }) => {
           });
         }}
         strokeWidth={4}
-        strokeColor="red"
+        strokeColor={myColor}
       />
     </div>
   );
