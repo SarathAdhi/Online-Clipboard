@@ -42,7 +42,6 @@ const NavLinks = ({ pathname = "" }) => {
                       "dark:text-white dark:!bg-gray-900  !bg-slate-200"
                   )}
                   href={href}
-                  rel="prefetch"
                 >
                   {name}
                 </a>
@@ -55,13 +54,13 @@ const NavLinks = ({ pathname = "" }) => {
       <div className="hidden md:flex items-center gap-1">
         {pages.map(({ name, href }) => (
           <a
+            key={name}
             className={cn(
               "py-2 px-4 hover:bg-slate-200 hover:dark:bg-gray-900 rounded-md font-medium",
               pathname === href &&
                 "dark:text-white dark:!bg-gray-900  !bg-slate-200"
             )}
             href={href}
-            rel="prefetch"
           >
             {name}
           </a>

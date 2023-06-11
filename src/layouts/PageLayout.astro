@@ -2,7 +2,7 @@
 import { cn } from "@utils/cn";
 import "@styles/global.css";
 import ReactToast from "@components/ReactToast";
-import ThemeButtonIcon from "@components/ThemeButtonIcon";
+import ThemeButton from "@components/ThemeButton";
 import { keywords } from "../../package.json";
 import NavLinks from "@components/NavLinks";
 import { theme } from "@utils/store";
@@ -71,18 +71,13 @@ const pathname = Astro.url.pathname;
         class="w-full max-w-[1280px] flex justify-between items-center p-2 sm:px-4"
       >
         <h2>
-          <a href="/" class="underline cursor-pointer" rel="prefetch">0CB</a>
+          <a href="/" class="underline cursor-pointer">0CB</a>
         </h2>
 
         <div class="flex gap-1">
           <NavLinks client:load pathname={pathname} />
 
-          <button
-            id="theme-toggle-btn"
-            class="py-2 px-4 hover:bg-slate-200 hover:dark:bg-[#111] rounded-md font-medium"
-          >
-            <ThemeButtonIcon client:load theme={theme.value} />
-          </button>
+          <ThemeButton client:only theme={theme.value} />
         </div>
       </div>
     </header>
@@ -100,20 +95,3 @@ const pathname = Astro.url.pathname;
     <Analytics client:only />
   </body>
 </html>
-
-<script>
-  import { theme } from "@utils/store";
-
-  const toggleThemeBtn = document.querySelector("#theme-toggle-btn")!;
-
-  toggleThemeBtn?.addEventListener("click", () => {
-    let html = document.querySelector("#html-element")!;
-
-    const _theme = html.className === "dark" ? "light" : "dark";
-    html.className = _theme;
-
-    document.cookie = `theme=${_theme}`;
-
-    theme.set(_theme);
-  });
-</script>
