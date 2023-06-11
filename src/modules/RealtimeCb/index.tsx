@@ -86,7 +86,7 @@ const RealtimeCb = ({ uuid = "" }) => {
   return (
     <div className="w-full flex flex-col gap-4 items-end flex-1">
       <div className="w-full flex items-center justify-between gap-4">
-        <div className="flex items-center flex-wrap gap-1">
+        <div className="bg-white rounded-full p-1 flex items-center flex-wrap gap-1">
           {activeUsers.map(({ user }: { user: string }) => (
             <Avatar key={user}>
               <AvatarImage src={getDummyProfileImage(user)} />

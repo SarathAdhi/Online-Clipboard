@@ -103,7 +103,7 @@ input[type="number"] {
     @apply text-base md:text-lg;
   }
   kbd {
-    @apply dark:bg-green-500 bg-green-300 px-1 rounded-sm;
+    @apply bg-green-600 px-1 rounded-sm;
   }
 }
 
