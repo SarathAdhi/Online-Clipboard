@@ -1,4 +1,5 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@components/ui/avatar";
+import { Button } from "@components/ui/button";
 import { ToolTip } from "@components/ui/tooltip";
 import { supabase } from "@lib/supabase";
 import type { RealtimeChannel } from "@supabase/supabase-js";
@@ -83,23 +84,21 @@ const ScribbleBoard = ({ uuid = "" }) => {
     <div className="flex flex-col gap-4 flex-1">
       <div className="w-full flex items-center justify-between gap-4">
         <div className="bg-white rounded-full p-1 flex items-center flex-wrap gap-1">
-          {activeUsers.map(({ user, color }) => {
-            return (
-              <Avatar
-                key={user}
-                className="!border-4"
-                style={{
-                  borderColor: color,
-                }}
-              >
-                <AvatarImage src={getDummyProfileImage(user)} />
+          {activeUsers.map(({ user, color }) => (
+            <Avatar
+              key={user}
+              className="!border-4"
+              style={{
+                borderColor: color,
+              }}
+            >
+              <AvatarImage src={getDummyProfileImage(user)} />
 
-                <AvatarFallback>
-                  <div className="aspect-square h-full w-full animate-pulse bg-gray-300" />
-                </AvatarFallback>
-              </Avatar>
-            );
-          })}
+              <AvatarFallback>
+                <div className="aspect-square h-full w-full animate-pulse bg-gray-300" />
+              </AvatarFallback>
+            </Avatar>
+          ))}
         </div>
 
         <div className="space-x-2">
@@ -136,25 +135,35 @@ const ScribbleBoard = ({ uuid = "" }) => {
         </div>
       </div>
 
-      <ReactSketchCanvas
-        className="!rounded-md overflow-hidden"
-        height="500px"
-        ref={boardRef}
-        backgroundImage={drawnImage}
-        onChange={async (e) => {
-          if (e.length === 0) return;
+      <div className="space-y-2">
+        <div>
+          <div className="space-x-1">
+            <Button className="rounded-full p-1 w-8 h-8">X</Button>
+            <Button className="rounded-full p-1 w-8 h-8">X</Button>
+            <Button className="rounded-full p-1 w-8 h-8">X</Button>
+          </div>
+        </div>
 
-          const image = await boardRef.current?.exportImage("png");
+        <ReactSketchCanvas
+          className="!rounded-md overflow-hidden"
+          height="500px"
+          ref={boardRef}
+          backgroundImage={drawnImage}
+          onChange={async (e) => {
+            if (e.length === 0) return;
 
-          channel.send({
-            type: "broadcast",
-            event: "realtime-scribble",
-            payload: { image },
-          });
-        }}
-        strokeWidth={4}
-        strokeColor={myColor}
-      />
+            const image = await boardRef.current?.exportImage("png");
+
+            channel.send({
+              type: "broadcast",
+              event: "realtime-scribble",
+              payload: { image },
+            });
+          }}
+          strokeWidth={4}
+          strokeColor={myColor}
+        />
+      </div>
     </div>
   );
 };

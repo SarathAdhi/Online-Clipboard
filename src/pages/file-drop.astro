@@ -1,0 +1,19 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { uuid as funcUuid } from "@utils/uuid";
+import FileDrop from "@modules/FileDrop";
+
+const { url } = Astro;
+
+const id = url.searchParams.get("id");
+
+const uuid = id || funcUuid();
+
+if (!id) {
+  return Astro.redirect(`/file-drop?id=${uuid}`);
+}
+---
+
+<PageLayout>
+  <FileDrop client:load uuid={uuid} />
+</PageLayout>

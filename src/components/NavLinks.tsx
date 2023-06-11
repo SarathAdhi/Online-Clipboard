@@ -24,6 +24,10 @@ const pages = [
     name: "Url Minifier",
     href: "/url",
   },
+  {
+    name: "File Drop",
+    href: "/file-drop",
+  },
 ];
 
 const NavLinks = ({ pathname = "" }) => {

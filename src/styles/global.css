@@ -109,7 +109,7 @@ input[type="number"] {
 
 @layer components {
   .card {
-    @apply p-2 sm:p-4 rounded-md dark:bg-[#111] bg-white border-2 dark:border-gray-500;
+    @apply p-2 sm:p-4 rounded-md dark:bg-[#111] bg-white border border-input;
   }
   .ui-container {
     @apply grid w-full items-center gap-2;

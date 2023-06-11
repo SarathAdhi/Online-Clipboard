@@ -52,8 +52,6 @@ const RetrieveSection = ({
 
         const _clipBoardText = data[0].text;
 
-        console.log({ data });
-
         const _clipboardType = data[0].type || "text";
 
         setClipboardType(_clipboardType);
