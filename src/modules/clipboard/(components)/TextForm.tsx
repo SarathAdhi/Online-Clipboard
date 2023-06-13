@@ -17,7 +17,7 @@ const ButtonWithTooltip: React.FC<ButtonWithTooltip> = ({
   tooltip,
   ...rest
 }) => (
-  <ToolTip tooltip={tooltip}>
+  <ToolTip align="start" tooltip={tooltip}>
     <button {...rest}>{children}</button>
   </ToolTip>
 );

@@ -3,8 +3,8 @@ import { Input } from "@ui/input";
 import { Textarea } from "@ui/textarea";
 import { supabase } from "@lib/supabase";
 import { toast } from "react-hot-toast";
-import { Button } from "@components/ui/button";
-import { ScrollArea } from "@components/ui/scroll-area";
+import { Button } from "@ui/button";
+import { ScrollArea } from "@ui/scroll-area";
 import { linkify } from "@utils/linkify";
 import { Loader2 } from "lucide-react";
 

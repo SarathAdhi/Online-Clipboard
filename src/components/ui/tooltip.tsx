@@ -12,7 +12,7 @@ const TooltipTrigger = TooltipPrimitive.Trigger;
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
+>(({ className, sideOffset = 6, ...props }, ref) => (
   <TooltipPrimitive.Content
     ref={ref}
     sideOffset={sideOffset}
@@ -29,13 +29,22 @@ TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 interface ToolTipProps {
   children: React.ReactNode;
   tooltip: string;
+  align?: "center" | "start" | "end" | undefined;
+  side?: "top" | "right" | "bottom" | "left" | undefined;
 }
 
-const ToolTip: React.FC<ToolTipProps> = ({ tooltip, children }) => (
-  <TooltipProvider>
+const ToolTip: React.FC<ToolTipProps> = ({
+  tooltip,
+  children,
+  align = "center",
+  side = "top",
+}) => (
+  <TooltipProvider delayDuration={200}>
     <TooltipRoot>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
-      <TooltipContent>{tooltip}</TooltipContent>
+      <TooltipContent side={side} align={align}>
+        {tooltip}
+      </TooltipContent>
     </TooltipRoot>
   </TooltipProvider>
 );

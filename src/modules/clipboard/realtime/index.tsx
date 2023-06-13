@@ -1,5 +1,5 @@
-import { Textarea } from "@components/ui/textarea";
-import { ToolTip } from "@components/ui/tooltip";
+import { Textarea } from "@ui/textarea";
+import { ToolTip } from "@ui/tooltip";
 import { supabase } from "@lib/supabase";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { uuidCharactor } from "@utils/uuid";
@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
 import { getDummyProfileImage } from "@utils/profile-image";
-import { ScrollArea } from "@components/ui/scroll-area";
-import { Input } from "@components/ui/input";
+import { ScrollArea } from "@ui/scroll-area";
+import { Input } from "@ui/input";
 
 type ActiveUserProps = {
   presence_ref: string;
@@ -112,7 +112,7 @@ const RealtimeCb = ({ uuid = "" }) => {
             </button>
           </ToolTip>
 
-          <ToolTip tooltip="Share">
+          <ToolTip align="end" tooltip="Share">
             <button
               className="p-2 dark:bg-popover bg-white rounded-full border shadow"
               onClick={() => {

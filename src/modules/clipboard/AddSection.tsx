@@ -1,22 +1,6 @@
-import { ToolTip } from "@ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/tabs";
 import TextForm from "./(components)/TextForm";
 import ImageForm from "./(components)/ImageForm";
-
-interface ButtonWithTooltip
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  tooltip: string;
-}
-
-const ButtonWithTooltip: React.FC<ButtonWithTooltip> = ({
-  children,
-  tooltip,
-  ...rest
-}) => (
-  <ToolTip tooltip={tooltip}>
-    <button {...rest}>{children}</button>
-  </ToolTip>
-);
 
 const AddSection = () => {
   return (

@@ -1,11 +1,11 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@components/ui/avatar";
-import { Button } from "@components/ui/button";
-import { ToolTip } from "@components/ui/tooltip";
+import { Avatar, AvatarImage, AvatarFallback } from "@ui/avatar";
+import { Button } from "@ui/button";
+import { ToolTip } from "@ui/tooltip";
 import { supabase } from "@lib/supabase";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { getDummyProfileImage } from "@utils/profile-image";
 import { uuidCharactor } from "@utils/uuid";
-import { Download, Share } from "lucide-react";
+import { Download, MinusCircleIcon, PlusCircleIcon, Share } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
@@ -35,6 +35,7 @@ const ScribbleBoard = ({ uuid = "" }) => {
 
   const [activeUsers, setActiveUsers] = useState<ActiveUserProps[]>([]);
   const [drawnImage, setDrawnImage] = useState("");
+  const [strokeWidth, setStrokeWidth] = useState(2);
 
   useEffect(() => {
     channel = supabase.channel(`scribble-${uuid}`, {
@@ -102,7 +103,7 @@ const ScribbleBoard = ({ uuid = "" }) => {
         </div>
 
         <div className="space-x-2">
-          <ToolTip tooltip="Download Scribble">
+          <ToolTip side="bottom" align="end" tooltip="Download Scribble">
             <button
               className="p-2 dark:bg-popover bg-white rounded-full border shadow"
               onClick={async () => {
@@ -118,7 +119,7 @@ const ScribbleBoard = ({ uuid = "" }) => {
             </button>
           </ToolTip>
 
-          <ToolTip tooltip="Share">
+          <ToolTip side="bottom" align="end" tooltip="Share">
             <button
               className="p-2 bg-green-600 text-white rounded-full border shadow"
               onClick={() => {
@@ -137,10 +138,30 @@ const ScribbleBoard = ({ uuid = "" }) => {
 
       <div className="space-y-2">
         <div>
-          <div className="space-x-1">
-            <Button className="rounded-full p-1 w-8 h-8">X</Button>
-            <Button className="rounded-full p-1 w-8 h-8">X</Button>
-            <Button className="rounded-full p-1 w-8 h-8">X</Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="rounded-full p-1 w-8 h-8"
+              onClick={() => {
+                const sWidth = strokeWidth > 1 ? strokeWidth - 1 : strokeWidth;
+                setStrokeWidth(sWidth);
+              }}
+            >
+              <MinusCircleIcon />
+            </Button>
+
+            <p>{strokeWidth}</p>
+
+            <Button
+              variant="outline"
+              className="rounded-full p-1 w-8 h-8"
+              onClick={() => {
+                const sWidth = strokeWidth < 10 ? strokeWidth + 1 : strokeWidth;
+                setStrokeWidth(sWidth);
+              }}
+            >
+              <PlusCircleIcon />
+            </Button>
           </div>
         </div>
 
@@ -160,7 +181,7 @@ const ScribbleBoard = ({ uuid = "" }) => {
               payload: { image },
             });
           }}
-          strokeWidth={4}
+          strokeWidth={strokeWidth}
           strokeColor={myColor}
         />
       </div>

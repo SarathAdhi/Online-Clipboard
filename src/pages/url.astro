@@ -1,0 +1,14 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import IntroSectionUrl from "@modules/Url/IntroSectionUrl.astro";
+import UrlMinifierForm from "@modules/Url/UrlMinifierForm";
+---
+
+<PageLayout
+  title="Url Shortener | 0cb"
+  description="Get a short link in one click. Also, you can have full statistics for all shorten URLs of yours. Just put + at the end of the shortened link."
+>
+  <IntroSectionUrl />
+
+  <UrlMinifierForm origin={Astro.url.origin} client:load />
+</PageLayout>

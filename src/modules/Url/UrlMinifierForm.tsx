@@ -1,5 +1,5 @@
-import { Button } from "@components/ui/button";
-import { Input } from "@components/ui/input";
+import { Button } from "@ui/button";
+import { Input } from "@ui/input";
 import { useUrlMinifierFunctions } from "hooks/useUrlMinifierFunctions";
 import { Loader2 } from "lucide-react";
 import { toast } from "react-hot-toast";
