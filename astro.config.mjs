@@ -6,6 +6,7 @@ import compress from "astro-compress";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 import tsConfig from "./tsconfig.json";
+import { resolve } from "path";
 
 const alias = tsConfig.compilerOptions.paths;
 
