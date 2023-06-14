@@ -9,7 +9,7 @@ import tsConfig from "./tsconfig.json";
 import path, { resolve } from "path";
 
 const alias = tsConfig.compilerOptions.paths;
-const dirname = path.resolve(path.dirname(""));
+const dirname = resolve();
 
 const resolvedAliases = Object.fromEntries(
   Object.entries(alias).map(([key, value]) => [
