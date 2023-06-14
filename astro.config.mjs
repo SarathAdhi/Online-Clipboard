@@ -27,14 +27,4 @@ export default defineConfig({
     }),
     compress(),
   ],
-  vite: {
-    server: {
-      fs: {
-        allow: [".."],
-      },
-    },
-    resolve: {
-      alias: [{ find: "@", replacement: "/src" }],
-    },
-  },
 });
