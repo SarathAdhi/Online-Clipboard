@@ -1,9 +1,9 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
 import { supabase } from "@lib/supabase";
-import AddSection from "@modules/Clipboard/AddSection";
-import IntroSectionHome from "@modules/Clipboard/IntroSectionHome.astro";
-import RetrieveSection from "@modules/Clipboard/RetrieveSection";
+import AddSection from "@modules/clipboard/AddSection";
+import IntroSectionHome from "@modules/clipboard/IntroSectionHome.astro";
+import RetrieveSection from "@modules/clipboard/RetrieveSection";
 
 const {
   url: { searchParams },
@@ -35,7 +35,7 @@ if (cbId) {
 ---
 
 <PageLayout
-  title="Online ClipBoard"
+  title="Online ClipBoard | 0cb"
   description="0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID."
 >
   <IntroSectionHome />

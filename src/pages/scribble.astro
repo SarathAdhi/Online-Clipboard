@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
-import ScribbleBoard from "@modules/Scribble/ScribbleBoard";
-import IntroSectionScribble from "@modules/Scribble/IntroSectionScribble.astro";
+import ScribbleBoard from "@modules/scribble";
+import IntroSectionScribble from "@modules/scribble/IntroSectionScribble.astro";
 import { uuid as funcUuid } from "@utils/uuid";
 
 const { url } = Astro;
@@ -16,7 +16,7 @@ if (!id) {
 ---
 
 <PageLayout
-  title="Live Scribble (Share live with your friends)"
+  title="Live Scribble | 0cb"
   description="Live Scribble is a free online whiteboard that allows you to collaborate with others in real time. It is a canvas that can be used for brainstorming, tutoring, designing, and more."
 >
   <ScribbleBoard client:load uuid={uuid} />
