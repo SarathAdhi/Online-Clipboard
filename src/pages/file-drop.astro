@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
 import { uuid as funcUuid } from "@utils/uuid";
-import FileDrop from "@modules/filedrop";
+import FileDropForm from "@modules/filedrop/FileDropForm";
 
 const { url } = Astro;
 
@@ -15,5 +15,5 @@ if (!id) {
 ---
 
 <PageLayout>
-  <FileDrop client:load uuid={uuid} />
+  <FileDropForm client:load uuid={uuid} />
 </PageLayout>
