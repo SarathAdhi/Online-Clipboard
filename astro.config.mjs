@@ -14,7 +14,7 @@ const dirname = resolve();
 const resolvedAliases = Object.fromEntries(
   Object.entries(alias).map(([key, value]) => [
     key.replaceAll("/*", ""),
-    resolve(dirname, "src/" + value[0].replaceAll("/*", "")),
+    resolve(dirname, value[0].replaceAll("/*", "")),
   ])
 );
 
