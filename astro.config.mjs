@@ -19,11 +19,18 @@ export default defineConfig({
     }),
     react(),
     prefetch(),
-    compress(),
     sitemap({
       changefreq: "weekly",
       priority: 0.8,
       lastmod: new Date(),
     }),
+    compress(),
   ],
+  vite: {
+    build: {
+      rollupOptions: {
+        external: [/^node:.*/],
+      },
+    },
+  },
 });
