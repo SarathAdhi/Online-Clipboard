@@ -8,13 +8,10 @@
       "@utils/*": ["utils/*"],
       "@modules/*": ["modules/*"],
       "@layouts/*": ["layouts/*"],
-      "@components/*": ["components/*"],
       "@ui/*": ["components/ui/*"],
+      "@components/*": ["components/*"],
       "@hoc/*": ["hoc/*"],
-      "types/*": ["types/*"],
-      "@backend/*": ["backend/*"],
-      "@apis/*": ["backend/apis/*"],
-      "@models/*": ["backend/models/*"]
+      "types/*": ["types/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
