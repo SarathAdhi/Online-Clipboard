@@ -29,7 +29,10 @@ export default defineConfig({
   vite: {
     build: {
       rollupOptions: {
-        external: [/^node:.*/],
+        external: [
+          "react", // ignore react stuff
+          "react-dom",
+        ],
       },
     },
   },
