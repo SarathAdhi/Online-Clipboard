@@ -12,7 +12,10 @@ const alias = tsConfig.compilerOptions.paths;
 const dirname = path.resolve(path.dirname(""));
 
 const resolvedAliases = Object.fromEntries(
-  Object.entries(alias).map(([key, value]) => [key, resolve(dirname, value[0])])
+  Object.entries(alias).map(([key, value]) => [
+    key.replaceAll("/*", ""),
+    resolve(dirname, "src/" + value[0].replaceAll("/*", "")),
+  ])
 );
 
 // https://astro.build/config
