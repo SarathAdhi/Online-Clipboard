@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
 import { supabase } from "@lib/supabase";
-import UrlStats from "@modules/Url/UrlStats";
+import UrlStats from "@modules/url/UrlStats";
 import DeviceDetector from "device-detector-js";
 import moment from "moment";
 
@@ -106,7 +106,7 @@ const typeData = {
 const chartsData = [visitsChartData, browserData, osData, typeData];
 ---
 
-<PageLayout title="Stats | 0cb">
+<PageLayout title="Stats">
   {
     !urlDetails && (
       <div class="card space-y-4">
