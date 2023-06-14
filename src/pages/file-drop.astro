@@ -1,6 +1,6 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
-import FileDropSection from "@modules/Filedrop";
+import FileDropForm from "@modules/Filedrop/FileDropForm";
 import IntroSectionFileDrop from "@modules/Filedrop/IntroSectionFileDrop.astro";
 import { uuid as funcUuid } from "@utils/uuid";
 
@@ -16,7 +16,7 @@ if (!id) {
 ---
 
 <PageLayout title="File Drop">
-  <FileDropSection client:load uuid={uuid} />
+  <FileDropForm client:load uuid={uuid} />
 
   <IntroSectionFileDrop />
 </PageLayout>

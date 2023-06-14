@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
-import RealtimeCb from "@modules/Clipboard/Realtime";
 import IntroSectionRT from "@modules/Clipboard/Realtime/IntroSectionRT.astro";
+import RealtimeCbForm from "@modules/Clipboard/Realtime/RealtimeCbForm";
 
 import { uuid as funcUuid } from "@utils/uuid";
 
@@ -20,7 +20,7 @@ if (!id) {
   title="Live ClipBoard (Share live with your friends)"
   description="Realtime Clipboard to share text between computers very easy."
 >
-  <RealtimeCb client:load uuid={uuid} />
+  <RealtimeCbForm client:load uuid={uuid} />
 
   <IntroSectionRT />
 </PageLayout>

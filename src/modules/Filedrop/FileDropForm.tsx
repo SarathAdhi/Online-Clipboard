@@ -17,7 +17,7 @@ type ActiveUserProps = {
 
 let channel: RealtimeChannel;
 
-const FileDrop = ({ uuid = "" }) => {
+const FileDropForm = ({ uuid = "" }) => {
   const myId = uuidCharactor(10);
 
   const [activeUsers, setActiveUsers] = useState<ActiveUserProps[]>([]);
@@ -165,4 +165,4 @@ const FileDrop = ({ uuid = "" }) => {
   );
 };
 
-export default FileDrop;
+export default FileDropForm;

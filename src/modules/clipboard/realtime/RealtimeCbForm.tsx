@@ -18,7 +18,7 @@ type ActiveUserProps = {
 
 let channel: RealtimeChannel;
 
-const RealtimeCb = ({ uuid = "" }) => {
+const RealtimeCbForm = ({ uuid = "" }) => {
   const myId = uuidCharactor(10);
 
   const [text, setText] = useState("");
@@ -191,4 +191,4 @@ const RealtimeCb = ({ uuid = "" }) => {
   );
 };
 
-export default RealtimeCb;
+export default RealtimeCbForm;
