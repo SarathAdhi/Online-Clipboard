@@ -8,7 +8,11 @@ import NavLinks from "@components/NavLinks";
 import { theme } from "@utils/store";
 import { Analytics } from "@vercel/analytics/react";
 
-const { title, className, description = "" } = Astro.props;
+const {
+  title,
+  className,
+  description = "0CB - Online Clipboard - Copy and paste between devices",
+} = Astro.props;
 const myTheme = Astro.cookies.get("theme").value || "dark";
 theme.set(myTheme);
 
@@ -26,12 +30,14 @@ const pathname = Astro.url.pathname;
 
     <meta name="theme-color" content="#212121" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+
     <meta
-      name="description"
-      content={description ||
-        "0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID."}
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+
+    <meta name="description" content={description} />
+
     <meta
       name="keywords"
       content={keywords.join(", ") + ", " + description?.split(" ")?.join(", ")}

@@ -34,10 +34,7 @@ if (cbId) {
 }
 ---
 
-<PageLayout
-  title="Online ClipBoard | 0cb"
-  description="0CB is a free online tool that helps you to Copy and Retrieve Text and Images between any devices. Just copy the text or image and share the ID."
->
+<PageLayout title="Online ClipBoard | 0cb">
   <IntroSectionHome />
 
   <AddSection client:load />
@@ -48,4 +45,46 @@ if (cbId) {
     _clipBoardText={_clipBoardText}
     _clipBoardType={_clipBoardType}
   />
+
+  <div class="card grid gap-4">
+    <h2 class="underline">About Online Clipboard:</h2>
+
+    <p class="-mt-2">
+      {
+        `The clipboard, a crucial software feature typically integrated into
+      operating systems, facilitates seamless data transfer through copy and
+      paste functions, enabling temporary storage and efficient exchange of
+      information between files and applications. Widely utilized in graphical
+      user interface (GUI) environments, the clipboard operates as a transient
+      data buffer accessible to various programs via a universal programming
+      interface. Commonly accessed through user-friendly interfaces, including
+      hotkeys and menu options, clipboard operations enhance user experience
+      across diverse applications.`
+      }
+    </p>
+
+    <p>
+      {
+        "Enhance Your Productivity Across Multiple Devices with Our Innovative Online Clipboard Tool!"
+      }
+    </p>
+
+    <p>
+      {
+        "In today's dynamic work environment, people often switch between multiple devices, making it challenging to seamlessly transfer short texts or images. Traditional methods like emails or complex software can be overkill for quick sharing. That's where our unique tool comes in."
+      }
+    </p>
+
+    <p>
+      {
+        "Clipboard implementations vary across operating systems and versions, complicating the sharing process. Moreover, most environments only support a single clipboard operation, overwriting previous content with each cut or copy. The paste operation typically duplicates the content, keeping it in the clipboard for future use."
+      }
+    </p>
+
+    <p>
+      {
+        "Initially designed to store plain text, early clipboard implementations lacked meta-information like font, style, and color. Our Online Clipboard, while currently supporting plain text and images, is committed to expanding its features in the future. Stay tuned for more enhancements to elevate your cross-device workflow!"
+      }
+    </p>
+  </div>
 </PageLayout>

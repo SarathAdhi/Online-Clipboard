@@ -188,13 +188,15 @@ const RetrieveSection = ({
                       <strong>Clipboard</strong>.
                     </p>
 
-                    <Button
-                      variant="outline"
-                      type="button"
-                      onClick={() => setEnableTextEditing(true)}
-                    >
-                      Edit
-                    </Button>
+                    {isTextEditable && (
+                      <Button
+                        variant="outline"
+                        type="button"
+                        onClick={() => setEnableTextEditing(true)}
+                      >
+                        Edit
+                      </Button>
+                    )}
                   </div>
                 </>
               )}
