@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 const {
   title,
   className,
-  description = "0CB - Online Clipboard - Copy and paste between devices",
+  description = "0CB is a free online tool that helps you to copy and retrieve text and images between any devices. Just copy the text or image and share the ID. Now it supports Realtime clipboard and scribble too.",
 } = Astro.props;
 const myTheme = Astro.cookies.get("theme").value || "dark";
 theme.set(myTheme);
@@ -53,6 +53,12 @@ const pathname = Astro.url.pathname;
       name="google-site-verification"
       content="WktRMnuQpbrSHf_4e4jnomLNRgJhchMYsVaJPNMNYuk"
     />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3686965845963720"
+      crossorigin="anonymous"
+    ></script>
+
     <meta name="generator" content={Astro.generator} />
 
     <script>
