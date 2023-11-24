@@ -14,6 +14,7 @@
       "types/*": ["types/*"]
     },
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "allowImportingTsExtensions": true
   }
 }
