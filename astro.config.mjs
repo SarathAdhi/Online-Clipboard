@@ -5,7 +5,6 @@ import vercel from "@astrojs/vercel/serverless";
 import compress from "astro-compress";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
-import tsConfig from "./tsconfig.json";
 
 // https://astro.build/config
 export default defineConfig({

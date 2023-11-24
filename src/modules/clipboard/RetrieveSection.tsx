@@ -137,15 +137,16 @@ const RetrieveSection = ({
           )}
         </Button>
 
-        {clipBoardUuid && (
-          <div
-            className="absolute"
-            ref={(e) => e?.scrollIntoView({ behavior: "smooth" })}
-          />
-        )}
         {!!clipBoardText && (
           <>
             <hr className="w-full border-gray-300 border my-2 rounded-lg" />
+
+            {clipBoardUuid && (
+              <div
+                className="absolute"
+                ref={(e) => e?.scrollIntoView({ behavior: "smooth" })}
+              />
+            )}
 
             <div className="w-full grid gap-2">
               {enableTextEditing ? (
