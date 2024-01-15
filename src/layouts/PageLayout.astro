@@ -6,6 +6,8 @@ import { keywords } from "../../package.json";
 import { theme } from "@utils/store";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@components/Navbar.astro";
+// Supports weights 100-900
+import "@fontsource-variable/inter";
 
 const {
   title,
@@ -38,13 +40,9 @@ theme.set(myTheme);
 
     <meta
       name="keywords"
-      content="Online Clipboard, Free Online Clipboard, Online Clipboard (Sync Automatically in Realtime), 0cb, live clipboard"
+      content={keywords.join(", ") +
+        ", Online Clipboard, Free Online Clipboard, Online Clipboard (Sync Automatically in Realtime), 0cb, live clipboard"}
     />
-
-    <!-- <meta
-      name="keywords"
-      content={keywords.join(", ") + ", " + description?.split(" ")?.join(", ")}
-    /> -->
 
     <!-- Old -->
     <!-- <meta
@@ -69,16 +67,8 @@ theme.set(myTheme);
     </script>
 
     <style is:global>
-      @font-face {
-        font-family: "Hubot Sans";
-        src: url("/fonts/Hubot-Sans.woff2") format("woff2 supports variations"),
-          url("/fonts/Hubot-Sans.woff2") format("woff2-variations");
-        font-weight: 200 900;
-        font-stretch: 75% 125%;
-      }
-
       html {
-        font-family: "Hubot Sans" !important;
+        font-family: "Inter Variable", sans-serif !important;
       }
     </style>
   </head>
