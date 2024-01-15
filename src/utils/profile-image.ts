@@ -2,9 +2,7 @@ export const getDummyProfileImage = (
   keyword: string,
   category: string = "adventurer-neutral"
 ) => {
-  return `https://avatars.dicebear.com/api/${category}/${encodeURI(
-    keyword
-  )}.svg`;
+  return `https://api.dicebear.com/7.x/${category}/svg?seed=${keyword}`;
 };
 
 export const getBase64 = (file: Blob) => {

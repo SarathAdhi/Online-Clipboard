@@ -34,11 +34,6 @@ export const useClipboardFunctions = () => {
   const isTextEditable = uuid?.split("-")[1]?.toLowerCase() === "e";
 
   async function checkForUuidAvailability() {
-    setIsLoading({
-      ...isLoading,
-      generateIdBtn: true,
-    });
-
     if (!uuid) {
       setIsUuidAvailable(false);
     }
@@ -52,11 +47,6 @@ export const useClipboardFunctions = () => {
       if (data && data.length !== 0) setIsUuidAvailable(false);
       else setIsUuidAvailable(true);
     }
-
-    setIsLoading({
-      ...isLoading,
-      generateIdBtn: false,
-    });
   }
 
   async function handleSaveClipBoard(e: React.FormEvent) {
@@ -114,7 +104,7 @@ export const useClipboardFunctions = () => {
 
     const isTextEditable = _uuid?.split("-")[1]?.toLocaleLowerCase() === "e";
 
-    while (true) {
+    while (i > 5) {
       const { data } = await supabase
         .from(isTextEditable ? "clipboard-edit" : "clipboard")
         .select("*")
@@ -124,8 +114,13 @@ export const useClipboardFunctions = () => {
       else _uuid = funcUuid();
 
       ++i;
-      if (i > 5) break;
     }
+
+    if (setLoadingState)
+      setIsLoading({
+        ...isLoading,
+        generateIdBtn: false,
+      });
 
     setUuid(_uuid);
   }

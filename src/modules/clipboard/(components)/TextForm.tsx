@@ -62,7 +62,11 @@ const TextForm = () => {
             required
           />
 
-          <Button type="button" onClick={() => autoGenerateUniqueUuid(true)}>
+          <Button
+            type="button"
+            disabled={isLoading.generateIdBtn}
+            onClick={() => autoGenerateUniqueUuid(true)}
+          >
             {isLoading.generateIdBtn ? (
               <Loader2 width="30" className="animate-spin" />
             ) : (
